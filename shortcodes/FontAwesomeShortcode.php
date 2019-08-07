@@ -21,7 +21,12 @@ class FontAwesomeShortcode extends Shortcode
 
             // Get shortcode content and parameters
             $str = $sc->getContent();
-            $icon = $sc->getParameter('icon', $sc->getParameter('fa', $this->getBbCode($sc)));
+            $fa = $sc->getParameter('fa', $this->getBbCode($sc));
+            $icon = $sc->getParameter('icon', $fa);
+
+            $this->grav["debugger"]->addMessage($icon);
+            $this->grav["debugger"]->addMessage($fa);
+            //$icon = filter_var($icon, FILTER_SANITIZE_EMAIL);  // Remove quotes (for WordpressParser)
 
             if (!Utils::startsWith($icon, 'fa-')) {
                 $icon = 'fa-'.$icon;
